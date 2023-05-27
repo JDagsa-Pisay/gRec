@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="gRec">
+    <meta name="description" content="Your game. we pick.">
+    <meta name="author" content="Jayden Dagsa, Ac De Castro">
+    <meta name="revised" content="May-27-2023">
+    <meta name="keywords" content="gaming, genres, quiz">
+    <title>gRec - Questionnaire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="text-indigo-50 bg-slate-950 box-border font-plex flex flex-col">
+    <nav class="flex w-full justify-center gap-x-12 items-center py-10">
+        <a href="" class="text-6xl font-bold font-press-start">gRec</a>
+    </nav>
+    <div class="sm:px-20 md:px-10 lg:px-40 xl:px-60 self-stretch items-center justify-center flex flex-col gap-10">
+        <div class="px-10 w-full text-center">
+            <h1 class="tracking-widest text-3xl sm:text-5xl font-bold mb-4">WELCOME!</h1>
+            <p class="text-lg text-justify">
+                Our platform will ask you a maximum of 6 questions, and a minimum of 2 questions.
+                You might not be given all the questions because some questions might already 
+                filter your interests to a single genre. Your results will be one of the following 
+                15 genres: shooters, fighting games, rhythm games, MOBA, sports games, survival games, 
+                visual novels, puzzles, RPGs, social deduction games, strategy games, board games, 
+                party games, idle games, and horror games.
+            </p>
+        </div>
+        <button id="begin" class="rounded bg-indigo-950 py-4 px-6 my-1 hover:bg-indigo-900 text-center basis-2/3 transition-colors">Begin answering</button>
+    </div>
+    <script>
+        // on body load, check if question exists
+        // if it exists, check if == done, if so, redirect to result, if not then if question is not 0, then redirect
+        // if not existent, set question to 0 and save to local storage
+        document.body.onload = () => {
+            var quesCheck = localStorage.getItem("question");
+            if (quesCheck) {
+                if (quesCheck == "done") {
+                    var result = localStorage.getItem("result");
+                    window.open(`../results/${result}.html`, "_self");
+                } else {
+                    if (quesCheck > 0) {
+                        window.open(`./${quesCheck}.html`, "_self");
+                    }
+                }
+            } else {
+                localStorage.setItem("question", "0");
+            }
+        }
+
+        // when clicked, ask for name
+        // check if exists
+        // if existent, save name to localStorage, set question to 1, and redirect accordingly
+        // if not, alert user that they have to put a name
+        begin.onclick = () => {
+            var username = prompt("Before we begin, what is your name?");
+
+            if (username) {
+                localStorage.setItem("user", username);
+                localStorage.setItem("question", "1");
+                window.open("./1.html", "_self");
+            } else {
+                alert("Please enter a name.");
+            }
+        }
+    </script>
+</body>
+</html>

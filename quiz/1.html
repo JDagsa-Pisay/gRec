@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="gRec">
+    <meta name="description" content="Your game. we pick.">
+    <meta name="author" content="Jayden Dagsa, Ac De Castro">
+    <meta name="revised" content="May-27-2023">
+    <meta name="keywords" content="gaming, genres, quiz">
+    <title>gRec - Question 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="text-indigo-50 bg-slate-950 box-border font-plex flex flex-col">
+    <nav class="flex w-full justify-center gap-x-12 items-center py-10">
+        <a href="" class="text-6xl font-bold font-press-start">gRec</a>
+    </nav>
+    <div class="sm:px-20 md:px-10 lg:px-40 xl:px-60 items-center justify-center flex flex-col gap-10">
+        <div class="px-10 w-full text-center">
+            <h1 class="tracking-widest text-lg">QUESTION 1</h1>
+            <p class="text-3xl font-bold">Do you like fast-paced games or slower-paced ones?</p>
+        </div>
+        <div class="flex flex-col gap-10 w-full sm:flex-row px-10 self-stretch">
+            <button id="op1" class="rounded bg-indigo-950 sm:w-1/2 hover:bg-indigo-900 text-center transition-colors text-3xl py-10 w-full">Fast-paced</button>
+            <button id="op2" class="rounded bg-indigo-950 hover:bg-indigo-900 text-center transition-colors sm:w-1/2 text-3xl py-10 w-full">Slow-paced</button>
+        </div>
+        <div class="flex flex-col gap-10 w-full sm:flex-row px-10 justify-between">
+            <button id="restart" class="rounded bg-indigo-950 py-4 px-6 my-1 hover:bg-indigo-900 text-center transition-colors self-start">Restart</button>
+            <button id="next" class="rounded bg-indigo-950 py-4 px-6 my-1 hover:bg-indigo-900 text-center transition-colors self-start">Next</button>
+        </div>
+    </div>
+    <div class="bg-indigo-900"></div>
+    <script>
+        document.body.onload = () => {
+            // get current question
+            var quesCheck = localStorage.getItem("question");
+
+            // check if the key exists
+            if (quesCheck) {
+                // check if question key is not equal to 1
+                if (quesCheck !== "1") {
+                    // redirect based on question key
+                    switch (quesCheck) {
+                        case "0":
+                            // "0" denotes homepage for quiz
+                            window.open("./", "_self");
+                            break;
+                        default:
+                            window.open(`./${quesCheck}.html`, "_self");
+                    }
+                }
+            } else {
+                // key non-existent, go to homepage for quiz
+                window.open("./", "_self");
+            }
+        }
+
+        // set added pts to 100
+        // keep clicked button on lighter color
+        // remove lighter color, if applied, on the other button
+        op1.onclick = () => {
+            localStorage.setItem("addPt", "100");
+            op1.classList.remove("bg-indigo-950");
+            op1.classList.add("bg-indigo-900");
+            op2.classList.remove("bg-indigo-900");
+            op2.classList.add("bg-indigo-950");
+        }
+
+        // set added pts to 0
+        // keep clicked button on lighter color
+        // remove lighter color, if applied, on the other button
+        op2.onclick = () => {
+            localStorage.setItem("addPt", "0");
+            op1.classList.remove("bg-indigo-900");
+            op1.classList.add("bg-indigo-950");
+            op2.classList.remove("bg-indigo-950");
+            op2.classList.add("bg-indigo-900");
+        }
+
+        // when clicked, clear local storage and go back to quiz homepage
+        restart.onclick = () => {
+            localStorage.clear();
+            window.open("./", "_self");
+        }
+
+        // add new points to prev. total
+        // save new total to local storage
+        // set question to 2 and redirect
+        next.onclick = () => {
+            localStorage.setItem("totalPt", 0+Number(localStorage.getItem("addPt")));
+            localStorage.setItem("question", "2");
+            window.open("./2.html", "_self");
+        }
+    </script>
+</body>
+</html>
