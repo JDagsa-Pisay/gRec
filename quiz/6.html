@@ -101,21 +101,21 @@
             var newPt = Number(localStorage.getItem("totalPt"))+Number(localStorage.getItem("addPt"))
             localStorage.setItem("totalPt", newPt);
             localStorage.setItem("question", "done");
+            var result;
             switch (newPt) {
                 case 25:
-                    localStorage.setItem("result", "party-games");
+                    result = localStorage.setItem("result", "party-games");
                     break;
                 case 28:
-                    localStorage.setItem("result", "idle-games");
+                    result = localStorage.setItem("result", "idle-games");
                     break;
                 case 193:
-                    localStorage.setItem("result", "moba");
+                    result = localStorage.setItem("result", "moba");
                     break;
                 case 196:
-                    localStorage.setItem("result", "fighting");
+                    result = localStorage.setItem("result", "fighting");
                     break;
             }
-            var result = localStorage.getItem("result");
             window.open(`../results/${result}.html`, "_self");
         }
     </script>
